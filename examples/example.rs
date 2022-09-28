@@ -1,4 +1,7 @@
-use electrs_query::{get_balance_for_address, get_relay_fee, get_utxos_for_address, Client};
+use electrs_query::{
+    get_balance_for_address, get_historical_transactions_for_address, get_relay_fee,
+    get_utxos_for_address, Client,
+};
 
 fn main() {
     let address = "127.0.0.1:50001";
@@ -16,6 +19,12 @@ fn main() {
     println!("balance: {:#?}", address_balance);
     let address_utxos = get_utxos_for_address(&p2pkh_address, &client);
     println!("utxos: {:#?}", address_utxos);
+    let address_historical_transactions =
+        get_historical_transactions_for_address(&p2pkh_address, &client);
+    println!(
+        "historical transactions: {:#?}",
+        address_historical_transactions
+    );
 
     let p2sh_address = "2MzBNKyJjx44BDJfwEevVzS3Q9Z5kSEYUZB".to_string();
     let address_balance = get_balance_for_address(&p2sh_address, &client);

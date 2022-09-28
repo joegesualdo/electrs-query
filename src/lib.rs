@@ -5,7 +5,8 @@ use bitcoin_utils::{
 };
 use electrs_request::{
     BlockchainRelayFeeCommand, BlockchainScriptHashGetBalanceCommand,
-    BlockchainScriptHashListUnspentCommand, Client as ElectrsRequestClient,
+    BlockchainScriptHashGetHistoryCommand, BlockchainScriptHashListUnspentCommand,
+    Client as ElectrsRequestClient,
 };
 use hex_utilities::convert_big_endian_hex_to_little_endian;
 
@@ -25,6 +26,11 @@ impl Client {
 pub struct AddressBalance {
     pub confirmed: u64,
     pub unconfirmed: u64,
+}
+#[derive(Debug)]
+pub struct HistoricalTransaction {
+    pub height: u64,
+    pub tx_hash: String,
 }
 
 fn get_script_hash_for_p2pkh_address(p2pkh_address: &str) -> String {
@@ -77,6 +83,25 @@ pub fn get_balance_for_address(address: &str, client: &Client) -> AddressBalance
         unconfirmed: balance_response.unconfirmed,
         confirmed: balance_response.confirmed,
     }
+}
+pub fn get_historical_transactions_for_address(
+    address: &str,
+    client: &Client,
+) -> Vec<HistoricalTransaction> {
+    let script_hash = get_script_hash_for_address(address);
+    let script_hash_le = convert_big_endian_hex_to_little_endian(&script_hash);
+    let get_history_response = BlockchainScriptHashGetHistoryCommand::new(&script_hash_le)
+        .call(&client.electrs_request_client)
+        .unwrap();
+    let historical_transactions = get_history_response
+        .0
+        .iter()
+        .map(|historical_transaction| HistoricalTransaction {
+            height: historical_transaction.height,
+            tx_hash: historical_transaction.tx_hash.clone(),
+        })
+        .collect();
+    historical_transactions
 }
 
 #[derive(Debug)]

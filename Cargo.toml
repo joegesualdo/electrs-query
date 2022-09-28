@@ -1,6 +1,6 @@
 [package]
 name = "electrs-query"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "Request information from an Electrs Server"
 license = "MIT"
@@ -10,5 +10,5 @@ license = "MIT"
 [dependencies]
 bitcoin-address = "0.1.5"
 bitcoin-utils = "0.1.2"
-electrs-request = "0.1.1"
+electrs-request = "0.1.2"
 hex-utilities = "0.1.5"

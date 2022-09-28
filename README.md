@@ -13,7 +13,7 @@ This library provides helpful functions to query common information about an Ele
 > Add package to Cargo.toml file
 ```rust
 [dependencies]
-electrs-query = "0.1.0"
+electrs-query = "0.1.1"
 ```
 
 ## Usage:
@@ -35,6 +35,9 @@ println!("balance: {:#?}", address_balance);
 // get utxo for p2pkh address
 let address_utxos = get_utxos_for_address(&p2pkh_address, &client);
 println!("utxos: {:#?}", address_utxos);
+// get historical transactions for p2pkh address
+let historical_transactions = get_historical_transactions_for_address(&p2pkh_address, &client);
+println!("historical transactions: {:#?}", historical_transactions);
 
 let p2sh_address = "2MzBNKyJjx44BDJfwEevVzS3Q9Z5kSEYUZB".to_string();
 // get balance for p2sh address
@@ -43,6 +46,9 @@ println!("balance: {:#?}", address_balance);
 // get utxos for p2sh address
 let address_utxos = get_utxos_for_address(&p2pkh_address, &client);
 println!("utxos: {:#?}", address_utxos);
+// get historical transactions for p2sh address
+let historical_transactions = get_historical_transactions_for_address(&p2sh_address, &client);
+println!("historical transactions: {:#?}", historical_transactions);
 
 let p2wpkh_address = "tb1qphdqqxupe6dzkz3z58twy5l4s0v24mle5gkp99".to_string();
 // get balance for p2wpkh address
@@ -51,6 +57,9 @@ println!("balance: {:#?}", address_balance);
 // get utxos for p2wpkh address
 let address_utxos = get_utxos_for_address(&p2pkh_address, &client);
 println!("utxos: {:#?}", address_utxos);
+// get historical transactions for p2wpkh address
+let historical_transactions = get_historical_transactions_for_address(&p2wpkh_address, &client);
+println!("historical transactions: {:#?}", historical_transactions);
 ```
 
 ## API
