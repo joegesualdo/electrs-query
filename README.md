@@ -13,7 +13,7 @@ This library provides helpful functions to query common information about an Ele
 > Add package to Cargo.toml file
 ```rust
 [dependencies]
-electrs-query = "0.1.1"
+electrs-query = "0.1.2"
 ```
 
 ## Usage:
