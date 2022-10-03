@@ -29,7 +29,7 @@ pub struct AddressBalance {
 }
 #[derive(Debug)]
 pub struct HistoricalTransaction {
-    pub height: u64,
+    pub height: i64,
     pub tx_hash: String,
 }
 
